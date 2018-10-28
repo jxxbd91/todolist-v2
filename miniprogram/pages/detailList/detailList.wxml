@@ -1,0 +1,8 @@
+<!--miniprogram/pages/detailList/detailList.wxml-->
+<com-header class="com-header" title="{{header.title}}"></com-header>
+<view class='dl-list'>
+  <com-dl-card class="dl-list-card" type="emergency" title="很紧急" list="{{deLists[0]}}"></com-dl-card>
+  <com-dl-card class="dl-list-card" type="important" title="很重要" list="{{deLists[1]}}"></com-dl-card>
+  <com-dl-card class="dl-list-card" type="general" title="一般" list="{{deLists[2]}}"></com-dl-card>
+  <com-dl-card class="dl-list-card" type="unimportant" title="不重要" list="{{deLists[3]}}"></com-dl-card>
+</view>

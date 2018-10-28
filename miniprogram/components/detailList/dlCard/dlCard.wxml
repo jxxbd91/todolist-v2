@@ -1,0 +1,13 @@
+<!--components/detailList/dlCard/dlCard.wxml-->
+
+<view class='com-dl-card {{"color-block-"+type}}'>
+  <view class='cdc-title'>{{title}}</view>
+  <view class='cdc-list'>
+    <checkbox-group>
+      <view class='cdc-item' wx:for="{{list}}" wx:key="{{item.id}}">
+        <checkbox></checkbox>
+        <text class='cdc-item-cont'>{{item.content}}</text>
+      </view>
+    </checkbox-group>
+  </view>
+</view>

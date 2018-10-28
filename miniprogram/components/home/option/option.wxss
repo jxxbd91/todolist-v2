@@ -1,0 +1,44 @@
+/* components/home/option/option.wxss */
+.com-option {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 30rpx 50rpx;
+}
+
+.left-side {
+  display: flex;
+  align-items: center;
+}
+
+.icon {
+  display: inline-block;
+}
+
+.icon-before {
+  height: 70rpx;
+  width: 70rpx;
+  margin-right: 20rpx;
+}
+
+.icon-after {
+  height: 70rpx;
+  width: 70rpx;
+}
+
+.icon-project {
+  background-image: url("../../../images/icons/project.png");
+}
+
+.icon-label {
+  background-image: url("../../../images/icons/label.png");
+}
+
+.icon-address {
+  background-image: url("../../../images/icons/location.png");
+}
+
+.icon-right-row {
+  background-image: url("../../../images/icons/right.png");
+}

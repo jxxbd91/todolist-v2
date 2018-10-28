@@ -1,0 +1,26 @@
+<view class='home-main'>
+  <!-- head -->
+  <view class='home-header'>
+    <view class='userinfo'>
+      <image class='avatar' src="{{userInfo.avatarUrl}}"></image>
+      <text class='nickname'>{{userInfo.nickName}}</text>
+    </view>
+    <view class='add-btn'>
+      <navigator url='../add/add'>
+        <image class='add-btn-img' src='../../images/icons/add.png'></image>
+      </navigator>
+    </view>
+  </view>
+
+  <!-- content -->
+  <view class='home-content'>
+    <com-card wx:for="{{cardList}}" wx:key="{{index}}" cardItem="{{item}}"></com-card>
+  </view>
+
+  <!-- options -->
+  <view class='home-options'>
+    <com-option type="project" content="项目"></com-option>
+    <com-option type="label" content="标签"></com-option>
+    <com-option type="address" content="地点"></com-option>
+  </view>
+</view>

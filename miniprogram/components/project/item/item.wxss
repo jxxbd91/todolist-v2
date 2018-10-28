@@ -1,0 +1,94 @@
+/* components/project/item/item.wxss */
+@import "../../../styles/tasklevel.wxss";
+
+page {
+  background-color:rgb(228, 229, 230);
+}
+
+.icon {
+  height: 70rpx;
+  width: 70rpx;
+}
+
+.project-main {
+  padding: 0 20rpx;
+  margin-bottom: 10rpx;
+}
+
+.project-head {
+  height: 120rpx;
+  align-items: center;
+  background-color: #fff;
+  display: flex;
+}
+
+.head-main {
+  display: flex;
+  justify-content: space-between;
+  flex-grow: 1;
+  align-items: center;
+}
+
+.head-left-color-block {
+  width: 20rpx;
+  background: #f00;
+  height: 100%;
+}
+
+.head-content {
+  margin-left: 40rpx;
+}
+
+.head-right-icons {
+
+}
+
+.row-down {
+  height: 70rpx;
+  width: 70rpx;
+}
+
+.add-btn {
+  margin-left: 20rpx;
+}
+
+.project-item {
+
+}
+
+.pl-main {
+  height: 100rpx;
+  background-color: #FAFAFA;
+  margin-left: 20rpx;
+  display: flex;
+  font-size: 32rpx;
+}
+
+.pl-left-color-block {
+  width: 15rpx;
+  height: 100%;
+  margin-right: 20rpx;
+}
+
+.pl-content {
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.pl-content:nth-of-type(n+2) {
+  border-top: 5rpx solid #eee;
+}
+
+.pl-btn {
+  flex-basis: 150rpx;
+  background-color: #54A18B;
+  color: #fff;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+

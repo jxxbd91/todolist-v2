@@ -1,0 +1,7 @@
+<!--components/home/card/card.wxml-->
+<navigator url="{{'../../../../detailList/detailList?title='+titles[cardItem.query]}}">
+  <view class='home-card'>
+    <view class='no'>{{cardItem.no}}</view>
+    <view class='date'>{{cardItem.date}}</view>
+  </view>
+</navigator>

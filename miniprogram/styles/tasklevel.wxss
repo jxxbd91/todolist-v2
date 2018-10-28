@@ -1,0 +1,16 @@
+/* 根据重要等级划分颜色 */
+.color-block-emergency {
+  background-color: #FCDEDE;
+}
+
+.color-block-important {
+  background-color: #CAEEFA;
+}
+
+.color-block-general {
+  background-color: #FCF4C3;
+}
+
+.color-block-unimportant {
+  background-color: #E1F2BC;
+}

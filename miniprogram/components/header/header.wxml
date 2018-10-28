@@ -1,0 +1,12 @@
+<!--components/header/header.wxml-->
+
+<!-- 公共header组件 -->
+<view class='com-header'>
+  <view class='slot-left'>
+    <slot name="left"></slot>
+  </view>
+  <text class='title'>{{title}}</text>
+  <view class='slot-right'>
+    <slot name="right"></slot>
+  </view>
+</view>

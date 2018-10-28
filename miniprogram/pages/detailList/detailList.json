@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "com-header": "../../components/header/header",
+    "com-dl-card": "../../components/detailList/dlCard/dlCard"
+  }
+}

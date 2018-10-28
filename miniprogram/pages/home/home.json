@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "com-card": "../../components/home/card/card",
+    "com-option": "../../components/home/option/option"
+  }
+}

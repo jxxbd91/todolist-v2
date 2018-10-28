@@ -1,0 +1,6 @@
+<!--miniprogram/pages/list/list.wxml-->
+<view class='project'>
+  <!-- list -->
+  <com-project-item></com-project-item>
+  <com-project-item></com-project-item>
+</view>

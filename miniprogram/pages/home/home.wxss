@@ -1,0 +1,44 @@
+/* miniprogram/pages/home/home.wxss */
+page {
+  background-color: #3C4A64;
+}
+
+.home-header {
+  display: flex;
+  height: 120rpx;
+  line-height: 120rpx;
+  background-color: #2D3D4C;
+  align-items: center;
+  padding: 0 20rpx;
+  justify-content: space-between;
+}
+
+.avatar {
+  height: 80rpx;
+  width: 80rpx;
+  border-radius: 9999rpx;
+  vertical-align: middle;
+}
+
+.nickname {
+  color: #fff;
+  margin-left: 20rpx;
+}
+
+.add-btn-img {
+  display: flex;
+  align-items: center;
+}
+
+.add-btn-img {
+  width: 70rpx;
+  height: 70rpx;
+}
+
+.home-content {
+  padding: 10rpx 30rpx;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background-color: #3C4A64;
+}

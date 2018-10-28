@@ -1,0 +1,5 @@
+{
+  "usingComponents": {
+    "com-project-item": "../../components/project/item/item"
+  }
+}

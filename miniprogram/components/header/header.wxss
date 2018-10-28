@@ -1,0 +1,26 @@
+/* components/header/header.wxss */
+.com-header {
+  height: 120rpx;
+  background-color: #2D3D4C;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #fff;
+}
+
+.slot-left {
+  flex-basis: 120rpx;
+  text-align: center;
+}
+
+.title {
+  text-align: center;
+  color: #fff;
+  display: block;
+  flex-basis: 500rpx;
+}
+
+.slot-right {
+  flex-basis: 120rpx;
+  text-align: center;
+}

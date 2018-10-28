@@ -1,0 +1,36 @@
+<!--pages/add/add.wxml-->
+<com-header title="添加事项">
+  <view slot="right" bindtap='addHandle'>添加</view>
+</com-header>
+
+<view class='add-content'>
+  <view class='add-filter'>
+    <!-- 重要等级 -->
+    <view class='af-level'>
+      <view class='afl-title'>重要等级：</view>
+      <radio-group bindchange="radioChange" class="afl-radios">
+        <radio wx:for="{{levels}}" wx:key="{{index}}" value='{{index}}'>{{item}}</radio>
+      </radio-group>
+    </view>
+
+    <!-- 项目 -->
+    <view class='af-project'>
+      <picker bindchange="bindPickerChange" value="{{pickerVal}}" range="{{projects}}">
+        <view class="picker">
+          所属项目：{{projects[pickerVal]}}
+        </view>
+      </picker>
+      <input bindinput='proInputHandle' wx:if="{{projectInput}}" class='style-input project-input'></input>
+    </view>
+  </view>
+
+  <view class='add-title'>
+    <view class='add-title-title'>标题：</view>
+    <input bindinput='titleHandle' class='style-input at-input'></input>
+  </view>
+
+  <view class='add-destription'>
+    <view class='add-dest-title'>描述：</view>
+    <textarea bindinput='destriptionHandle' class='style-textarea ad-textarea'></textarea>
+  </view>
+</view>

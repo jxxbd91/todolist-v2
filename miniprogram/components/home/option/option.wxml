@@ -1,0 +1,12 @@
+<!--components/home/option/option.wxml-->
+<navigator open-type='navigate' url="{{'/pages/'+type+'/'+type}}">
+  <view class='com-option'>
+    <view class='left-side'>
+      <image wx:if="{{type==='project'}}" class='icon-before' src="../../../images/icons/project.png"></image>
+      <image wx:if="{{type==='label'}}" class='icon-before' src="../../../images/icons/label.png"></image>
+      <image wx:if="{{type==='address'}}" class='icon-before' src="../../../images/icons/location.png"></image>
+      <text>{{content}}</text>
+    </view>
+    <image class='icon-after' src='../../../images/icons/right.png'></image>
+  </view>
+</navigator>

@@ -1,0 +1,22 @@
+/* components/home/card/card.wxss */
+.home-card {
+  width: 340rpx;
+  height: 300rpx;
+  background-color: #39B8D9;
+  color: #fff;
+  font-size: 40rpx;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  float: left;
+  margin-top: 20rpx;
+}
+
+.no {
+  margin-bottom: 10rpx;
+}
+
+.date {
+
+}

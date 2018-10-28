@@ -1,0 +1,23 @@
+/* components/detailList/dlCard/dlCard.wxss */
+@import "../../../styles/tasklevel.wxss";
+
+.com-dl-card {
+  height: 100%;
+}
+
+.cdc-title {
+  text-indent: 20rpx;
+  line-height: 70rpx;
+  border-bottom: 1rpx dashed #666;
+}
+
+.cdc-list {
+  padding: 0 10rpx;
+}
+
+.cdc-item {
+  display: flex;
+  align-items: center;
+  border-bottom: 1rpx solid #fff;
+  line-height: 70rpx;
+}

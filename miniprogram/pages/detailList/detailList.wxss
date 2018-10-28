@@ -1,0 +1,21 @@
+/* miniprogram/pages/detailList/detailList.wxss */
+page {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.com-header {
+  
+}
+
+.dl-list {
+  display: flex;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+.dl-list-card {
+  width: 375rpx;
+  flex-shrink: 0;
+}

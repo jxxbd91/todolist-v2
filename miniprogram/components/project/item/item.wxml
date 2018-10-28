@@ -1,0 +1,34 @@
+<!--components/project/item/item.wxml-->
+<wxs module="projectList">
+  var getColorBlock = function (type) {
+    return 'color-block-' + type
+  }
+  module.exports = {
+    getColorBlock: getColorBlock
+  }
+</wxs>
+
+<view class='project-main'>
+  <view class='project-head'>
+    <view class='head-left-color-block'></view>
+    <view class='head-main'>
+      <view class='head-content'>{{projectData.head.title}}</view>
+      <view class='head-right-icons'>
+        <image wx:if="{{hiddenFlag}}" bindtap="rowDownHandle" class='icon row-down' src='../../../images/icons/down-black.png'></image>
+        <image wx:else bindtap="rowDownHandle" class='icon row-down' src='../../../images/icons/up-black.png'></image>
+        <image class='icon add-btn' src='../../../images/icons/plus-black.png'></image>
+      </view>
+    </view>
+  </view>
+  <view hidden='{{hiddenFlag}}' class='project-list'>
+    <block wx:for="{{projectData.list}}" wx:key="{{item.id}}">
+      <view class='pl-main'>
+        <view class='pl-left-color-block {{projectList.getColorBlock(item.type)}}'></view>
+        <view class='pl-content'>
+          <view class='pl-text'>{{item.content}}</view>
+          <view class='pl-btn'>开始</view>
+        </view>
+      </view>
+    </block>
+  </view>
+</view>
