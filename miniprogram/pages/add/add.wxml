@@ -20,17 +20,17 @@
           所属项目：{{projects[pickerVal]}}
         </view>
       </picker>
-      <input bindinput='proInputHandle' wx:if="{{projectInput}}" class='style-input project-input'></input>
+      <input bindinput='proInputHandle' wx:if="{{projectInput}}" class='style-input project-input' value="{{submitData.project}}"></input>
     </view>
   </view>
 
   <view class='add-title'>
     <view class='add-title-title'>标题：</view>
-    <input bindinput='titleHandle' class='style-input at-input'></input>
+    <input bindinput='titleHandle' class='style-input at-input' value='{{submitData.title}}'></input>
   </view>
 
   <view class='add-destription'>
     <view class='add-dest-title'>描述：</view>
-    <textarea bindinput='destriptionHandle' class='style-textarea ad-textarea'></textarea>
+    <textarea bindinput='destriptionHandle' class='style-textarea ad-textarea' value='{{submitData.destription}}'></textarea>
   </view>
 </view>

@@ -9,39 +9,38 @@ Page({
       '紧急', '重要', '一般', '不重要'
     ],
     projects: [],
+    originProjects: [],
     pickerVal: '',
     projectInput: false,
     submitData: {
-      level: '',
+      level: 0,
       project: '',
       projectId: '',
       title: '',
       destription: ''
-    }
+    },
+    DB: null
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.data.projects.push('其他')
-    this.setData({
-      projects: this.data.projects
-    })
+    this.data.DB = wx.cloud.database()
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    console.log(this.data)
+    this.getProjectList()
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**
@@ -79,6 +78,25 @@ Page({
 
   },
 
+  /**
+   * 获取项目列表
+   */
+  getProjectList () {
+    let _this = this
+    this.data.DB.collection('projects')
+      .get({
+        success (res) {
+          let { data } = res
+          let pro = data.map(item => item.name)
+          pro.push('其他')
+          _this.setData({
+            originProjects: data,
+            projects: pro
+          })
+        }
+      })
+  },
+
   radioChange (e) {
     this.setData({
       'submitData.level': e.detail.value
@@ -89,8 +107,10 @@ Page({
     let {detail: {value}} = e
     this.setData({
       pickerVal: value,
-      projectInput: this.data.projects[value] === '其他'
+      projectInput: this.data.projects[value] === '其他',
+      'submitData.projectId': value < (this.data.projects.length - 1) ? this.data.originProjects[value]._id:''
     })
+    console.log(this.data.submitData)
   },
 
   titleHandle (e) {
@@ -106,20 +126,78 @@ Page({
   },
 
   addHandle (e) {
-    console.log(this.data.submitData)
-    const DB = wx.cloud.database()
-    DB.collection('todos')
-      .add({
-        data: this.data.submitData,
-        success (res) {
-          console.log(res)
-        }
-      })
+    let _this = this
+    if (!this.data.submitData.projectId) {
+      this.createProj(this.data.DB, this.data.submitData.project)
+        .then(res => {
+          let { _id } = res
+          let params = JSON.parse(JSON.stringify(this.data.submitData))
+          params.projectId = _id
+          params.createTime = new Date().getTime()
+          this.data.DB.collection('todos')
+            .add({
+              data: params,
+              success(res) {
+                _this.addSuccess()                
+              }
+            })
+        })
+        .catch(err => {
+        })
+    } else {
+      let params = JSON.parse(JSON.stringify(this.data.submitData))
+      params.createTime = new Date().getTime()
+      this.data.DB.collection('todos')
+        .add({
+          data: params,
+          success(res) {
+            _this.addSuccess()
+          }
+        })
+    }
   },
 
   proInputHandle (e) {
     this.setData({
       'submitData.project': e.detail.value
     })
+  },
+
+  createProj (DB, project) {
+    return new Promise((resolve, reject) => {
+      DB.collection('projects')
+        .add({
+          data: {
+            name: project
+          },
+          success(res) {
+            console.log(res)
+            resolve(res)
+          },
+          error (err) {
+            console.log(err)
+            reject(err)
+          }
+        })
+    })
+  },
+
+  /**
+   * 添加成功
+   */
+  addSuccess () {
+    wx.showToast({
+      title: '添加成功',
+      icon: 'success'
+    })
+    setTimeout(() => {
+      wx.hideToast({
+        success () {
+          wx.navigateTo({
+            url: '/pages/home/home',
+          })
+        }
+      })
+    }, 1000)
   }
 })
