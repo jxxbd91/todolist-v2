@@ -43,6 +43,8 @@ Page({
         })
       }
     })
+
+    this.getInitList()
   },
 
   /**
@@ -84,5 +86,18 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 通过云函数获取数据条数
+   */
+  getInitList () {
+    wx.cloud.callFunction({
+      name: 'getIndexList'
+    }).then(res => {
+      console.log(res)
+    }).catch(err => {
+      console.log(err)
+    })
   }
 })

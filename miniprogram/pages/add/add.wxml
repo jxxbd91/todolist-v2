@@ -24,6 +24,11 @@
     </view>
   </view>
 
+  <!-- 预计完成时间 -->
+  <view class='af-comp-time'>
+    
+  </view>
+
   <view class='add-title'>
     <view class='add-title-title'>标题：</view>
     <input bindinput='titleHandle' class='style-input at-input' value='{{submitData.title}}'></input>
