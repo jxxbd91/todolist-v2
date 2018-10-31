@@ -14,7 +14,7 @@ Page({
       },
       {
         no: 0,
-        date: '明天',
+        date: '将来',
         query: 1
       },
       {
@@ -56,7 +56,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow () {
   },
 
   /**
@@ -95,7 +95,13 @@ Page({
     wx.cloud.callFunction({
       name: 'getIndexList'
     }).then(res => {
-      console.log(res)
+      let {result = []} = res
+      this.setData({
+        'cardList[0].no': result[0] ? result[0].total : 0,
+        'cardList[1].no': result[1] ? result[1].total : 0,
+        'cardList[2].no': result[2] ? result[2].total : 0,
+        'cardList[3].no': result[3] ? result[3].total : 0
+      })
     }).catch(err => {
       console.log(err)
     })

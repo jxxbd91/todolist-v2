@@ -12,6 +12,7 @@ Page({
     originProjects: [],
     pickerVal: '',
     projectInput: false,
+    compValue: '',
     submitData: {
       level: 0,
       project: '',
@@ -119,6 +120,13 @@ Page({
     })
   },
 
+  compChangeHandle (e) {
+    let {detail: {value}} = e
+    this.setData({
+      compValue: value
+    })
+  },
+
   destriptionHandle (e) {
     this.setData({
       'submitData.destription': e.detail.value
@@ -134,6 +142,7 @@ Page({
           let params = JSON.parse(JSON.stringify(this.data.submitData))
           params.projectId = _id
           params.createTime = new Date().getTime()
+          params.completeDate = new Date(this.data.compValue).getTime()
           this.data.DB.collection('todos')
             .add({
               data: params,

@@ -5,14 +5,14 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    list: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getInitList()
   },
 
   /**
@@ -62,5 +62,24 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  getInitList() {
+    wx.cloud.callFunction({
+      name: 'getProjectList'
+    }).then(res => {
+      let {result = []} = res
+      this.setData({
+        list: result.map(item => {
+          item.head = {
+            title: item.projectName
+          }
+          return item
+        })
+      })
+      console.log(this.data.list)
+    }).catch(err => {
+      console.log(err)
+    })
   }
 })

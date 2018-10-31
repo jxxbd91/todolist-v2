@@ -4,7 +4,8 @@
     return 'color-block-' + type
   }
   module.exports = {
-    getColorBlock: getColorBlock
+    getColorBlock: getColorBlock,
+    levels: ['emergency', 'important', 'general', 'unimportant']
   }
 </wxs>
 
@@ -21,11 +22,11 @@
     </view>
   </view>
   <view hidden='{{hiddenFlag}}' class='project-list'>
-    <block wx:for="{{projectData.list}}" wx:key="{{item.id}}">
+    <block wx:for="{{projectData.data}}" wx:key="{{item._id}}">
       <view class='pl-main'>
-        <view class='pl-left-color-block {{projectList.getColorBlock(item.type)}}'></view>
+        <view class='pl-left-color-block {{projectList.getColorBlock(projectList.levels[item.level])}}'></view>
         <view class='pl-content'>
-          <view class='pl-text'>{{item.content}}</view>
+          <view class='pl-text'>{{item.title}}</view>
           <view class='pl-btn'>开始</view>
         </view>
       </view>

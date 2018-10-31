@@ -26,7 +26,9 @@
 
   <!-- 预计完成时间 -->
   <view class='af-comp-time'>
-    
+    <picker mode="date" bindchange='compChangeHandle'>
+      预计完成时间：{{compValue}}
+    </picker>
   </view>
 
   <view class='add-title'>

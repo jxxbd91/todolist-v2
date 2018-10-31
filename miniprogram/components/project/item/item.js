@@ -8,9 +8,9 @@ Component({
       type: Object,
       value: {
         head: {
-          title: '项目一'
+          title: ''
         },
-        list: [
+        data: [
           {
             id: 1,
             content: '小项目一',
