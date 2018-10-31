@@ -1,4 +1,5 @@
 <!--pages/add/add.wxml-->
+
 <com-header title="添加事项">
   <view slot="right" bindtap='addHandle'>添加</view>
 </com-header>
@@ -26,7 +27,9 @@
 
   <!-- 预计完成时间 -->
   <view class='af-comp-time'>
-    
+    <picker mode="date" start="{{startDate}}" bindchange='comTimeChangeHandle' value="{{completeValue}}">
+      <text>预计完成时间：{{completeValue}}</text>
+    </picker>
   </view>
 
   <view class='add-title'>

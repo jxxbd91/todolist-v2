@@ -11,9 +11,19 @@ exports.main = async (event, context) => {
   const todayS = new Date(now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()).getTime()
   const tomoS = todayS + aDay
   const tomoE = tomoS + aDay
-  return Promise.all([await db.collection('todos').where({
-    createTime: _.gt(todayS).and(_.lt(tomoS))
-  }).get(), await db.collection('todos').where({
-    createTime: _.gt(tomoS).and(_.lt(tomoE))
-  }).get()])
+  const nowDay = now.getDay()
+  const dayS = todayS - nowDay * aDay
+  const dayE = todayS + (7 - nowDay) * aDay
+  return Promise.all([
+    await db.collection('todos').where({
+      completeDate: _.gt(todayS).and(_.lt(tomoS))
+    }).count(),
+    await db.collection('todos').where({
+      completeDate: _.gt(tomoS)
+    }).count(),
+    await db.collection('todos').where({
+      completeDate: _.gt(dayS).and(_.lt(dayE))
+    }).count(),
+    await db.collection('todos').count()
+  ])
 }

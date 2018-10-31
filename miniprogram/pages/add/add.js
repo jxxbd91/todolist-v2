@@ -12,14 +12,17 @@ Page({
     originProjects: [],
     pickerVal: '',
     projectInput: false,
+    completeValue: '',
     submitData: {
-      level: 0,
+      level: '',
       project: '',
       projectId: '',
       title: '',
-      destription: ''
+      destription: '',
+      completeDate: ''
     },
-    DB: null
+    DB: null,
+    startDate: ''
   },
 
   /**
@@ -33,8 +36,11 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log(this.data)
     this.getProjectList()
+    const now = new Date()
+    this.setData({
+      startDate: now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()
+    })
   },
 
   /**
@@ -111,6 +117,14 @@ Page({
       'submitData.projectId': value < (this.data.projects.length - 1) ? this.data.originProjects[value]._id:''
     })
     console.log(this.data.submitData)
+  },
+
+  comTimeChangeHandle (e) {
+    let {detail: {value}} = e
+    this.setData({
+      'submitData.completeDate': new Date(value).getTime() + 24 * 60 * 60 * 1000 - 1,
+      completeValue: value
+    })
   },
 
   titleHandle (e) {

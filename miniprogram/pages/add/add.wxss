@@ -39,3 +39,7 @@
 .project-input {
   margin-top: 20rpx;
 }
+
+.af-comp-time {
+  margin-bottom: 40rpx;
+}
