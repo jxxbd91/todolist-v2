@@ -96,6 +96,7 @@ Page({
       name: 'getIndexList'
     }).then(res => {
       let {result = []} = res
+      console.log(result)
       this.setData({
         'cardList[0].no': result[0] ? result[0].total : 0,
         'cardList[1].no': result[1] ? result[1].total : 0,

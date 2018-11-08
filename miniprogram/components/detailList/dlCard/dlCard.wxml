@@ -4,9 +4,9 @@
   <view class='cdc-title'>{{title}}</view>
   <view class='cdc-list'>
     <checkbox-group>
-      <view class='cdc-item' wx:for="{{list}}" wx:key="{{item.id}}">
+      <view class='cdc-item' wx:for="{{list}}" wx:key="{{item._id}}">
         <checkbox></checkbox>
-        <text class='cdc-item-cont'>{{item.content}}</text>
+        <text class='cdc-item-cont'>{{item.destription}}</text>
       </view>
     </checkbox-group>
   </view>

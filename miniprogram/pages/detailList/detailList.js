@@ -8,6 +8,7 @@ Page({
     header: {
       title: ''
     },
+    type: '',
     deLists: [
       [
         {
@@ -24,7 +25,8 @@ Page({
   onLoad: function (options) {
     console.log(options)
     this.setData({
-      'header.title': options.title
+      'header.title': options.title,
+      type: options.type
     })
   },
 
@@ -32,7 +34,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-
+    this.getDetailList()
   },
 
   /**
@@ -75,5 +77,73 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  /**
+   * 获取详情列表
+   * 需要根据type进行判断，type共有四种可能值
+   * 0 -- 今天
+   * 1 -- 将来
+   * 2 -- 本周
+   * 3 -- 记录
+   */
+  getDetailList () {
+    const db = wx.cloud.database()
+    let condition = this.queryCondition(db.command)
+    if (condition) {
+      db.collection('todos').where({
+        completeDate: condition
+      }).get().then(res => {
+        this.queryServerResult(res)
+      }).catch(err => {
+        console.log(err)
+      })
+    } else {
+      db.collection('todos').get().then(res => {
+        this.queryServerResult(res)
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+  },
+
+  /**
+   * 请求条件
+   */
+  queryCondition(_) {
+    const aDay = 24 * 60 * 60 * 1000
+    const now = new Date()
+    const todayS = new Date(now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()).getTime()
+    const tomoS = todayS + aDay
+    const tomoE = tomoS + aDay
+    const nDay = now.getDay()
+    const dayS = todayS - nDay * aDay
+    const dayE = dayS + 7 * aDay
+    switch(this.data.type) {
+      case '0':
+        return _.gt(todayS).and(_.lt(tomoS))
+      case '1':
+        return _.gt(tomoS)
+      case '2':
+        return _.gt(dayS).and(_.lt(dayE))
+      case '3':
+        return null
+    }
+  },
+
+  /**
+   * 处理请求结果
+   * 根据level进行分组，并且根据 createTime 进行升序排列
+   */
+  queryServerResult (res) {
+    let {data = []} = res
+    let result = [[], [], [], []]
+    data.forEach(item => {
+      result[item.level].push(item)
+    })
+    console.log(result)
+    this.setData({
+      deLists: result
+    })
   }
 })
