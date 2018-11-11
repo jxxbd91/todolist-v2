@@ -7,7 +7,8 @@
       <view>{{todoInfo.title}}</view>
     </view>
     <view class='detail-description {{doneFlag?"done":""}}'>{{todoInfo.destription}}</view>
-    
+    <view class='detail-comp-time'>创建时间： {{createTime}}</view>
+    <view class='detail-comp-time'>预计完成时间： {{completeTime}}</view>
   </view>
 
   <view class='detail-btns'>

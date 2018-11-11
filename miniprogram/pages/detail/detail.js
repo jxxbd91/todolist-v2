@@ -1,4 +1,6 @@
 // miniprogram/pages/detail/detail.js
+const { dateFormat } = require('../../common/utils.js')
+
 Page({
 
   /**
@@ -8,7 +10,9 @@ Page({
     id: '',
     todoInfo: {},
     doneFlag: false,
-    db: null
+    db: null,
+    completeTime: '',
+    createTime: ''
   },
 
   /**
@@ -84,7 +88,9 @@ Page({
       console.log(res)
       this.setData({
         todoInfo: res.data[0],
-        doneFlag: res.data[0].done
+        doneFlag: res.data[0].done,
+        completeTime: dateFormat({ date: res.data[0].completedDate }),
+        createTime: dateFormat({date: res.data[0].createTime})
       })
     })
     .catch(err => {
@@ -113,5 +119,14 @@ Page({
       .catch(err => {
         console.log(err)
       })
+  },
+
+  /**
+   * 编辑响应
+   */
+  editHandle () {
+    wx.navigateTo({
+      url: '/pages/add/add?id=' + this.data.id,
+    })
   }
 })

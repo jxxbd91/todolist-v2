@@ -70,3 +70,9 @@
   color: #aaa;
   text-decoration: line-through;
 }
+
+.detail-comp-time {
+  font-size: 28rpx;
+  margin-top: 20rpx;
+  text-align: right;
+}

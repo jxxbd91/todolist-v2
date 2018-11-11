@@ -66,14 +66,14 @@ const Utils = (() => {
 
 
 // 时间转换
-const dateFormat = ({date, type = 'yyyy年mm月dd day'}) => {
+const dateFormat = ({date, type = 'yyyy年mm月dd day', contDay = true}) => {
   if (Utils.isUndefined(date) || Utils.isNull(date)) {
     date = new Date()
   } else {
     date = new Date(date)
   }
   const dayMap = ['周日', '周一', '周二', '周三', '周四', '周五', '周六']
-  return date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + ' ' + dayMap[date.getDay()]
+  return contDay ? date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate() + ' ' + dayMap[date.getDay()] : date.getFullYear() + '年' + (date.getMonth() + 1) + '月' + date.getDate()
 }
 
 exports.Utils = Utils

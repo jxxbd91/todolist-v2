@@ -1,4 +1,6 @@
 // pages/add/add.js
+const { dateFormat } = require('../../common/utils.js')
+
 Page({
 
   /**
@@ -18,10 +20,12 @@ Page({
       project: '',
       projectId: '',
       title: '',
+      completeDate: '',
       destription: '',
       done: false
     },
     initProjectId: '',
+    initId: '',
     DB: null
   },
 
@@ -31,6 +35,7 @@ Page({
   onLoad: function (options) {
     this.setData({
       initProjectId: options.projectId || '',
+      initId: options.id || '',
       'submitData.projectId': options.projectId || '',
       'submitData.project': options.projectName || ''
     })
@@ -94,7 +99,6 @@ Page({
       .get({
         success (res) {
           let { data } = res
-          console.log(data)
           let pro = data.map(item => item.name)
           let ids = data.map(item => item._id)
           let picker = ids.indexOf(_this.data.initProjectId)
@@ -107,6 +111,9 @@ Page({
             _this.setData({
               pickerVal: picker
             })
+          }
+          if (_this.data.initId) {
+            _this.getEditDetail()
           }
         }
       })
@@ -149,36 +156,65 @@ Page({
 
   addHandle (e) {
     let _this = this
-    if (!this.data.submitData.projectId) {
-      this.createProj(this.data.DB, this.data.submitData.project)
-        .then(res => {
-          let { _id } = res
-          let params = JSON.parse(JSON.stringify(this.data.submitData))
-          params.projectId = _id
-          params.createTime = new Date().getTime()
-          params.completeDate = new Date(this.data.compValue).getTime()
-          this.data.DB.collection('todos')
-            .add({
-              data: params,
-              success(res) {
-                _this.addSuccess()                
-              }
-            })
-        })
-        .catch(err => {
-        })
+    if (this.data.initId) {
+      this.updateTodo()
     } else {
-      let params = JSON.parse(JSON.stringify(this.data.submitData))
-      params.createTime = new Date().getTime()
-      params.completeDate = new Date(this.data.compValue).getTime()
-      this.data.DB.collection('todos')
-        .add({
-          data: params,
-          success(res) {
-            _this.addSuccess()
-          }
-        })
+      if (!this.data.submitData.projectId) {
+        this.createProj(this.data.DB, this.data.submitData.project)
+          .then(res => {
+            let { _id } = res
+            let params = JSON.parse(JSON.stringify(this.data.submitData))
+            params.projectId = _id
+            params.createTime = new Date().getTime()
+            params.completeDate = new Date(this.data.compValue).getTime()
+            this.data.DB.collection('todos')
+              .add({
+                data: params,
+                success(res) {
+                  _this.addSuccess()                
+                }
+              })
+          })
+          .catch(err => {
+          })
+      } else {
+        let params = JSON.parse(JSON.stringify(this.data.submitData))
+        params.createTime = new Date().getTime()
+        params.completeDate = new Date(this.data.compValue).getTime()
+        this.data.DB.collection('todos')
+          .add({
+            data: params,
+            success(res) {
+              _this.addSuccess()
+            }
+          })
+      }
     }
+  },
+
+  /**
+   * 执行更新操作
+   * 编辑时提交到server
+   */
+  updateTodo () {
+    this.data.DB.collection('todos')
+    .doc(this.data.initId)
+    .update({
+      data: {
+        level: this.data.submitData.level,
+        project: this.data.submitData.project,
+        projectId: this.data.submitData.projectId,
+        title: this.data.submitData.title,
+        destription: this.data.submitData.destription,
+        done: false
+      }
+    })
+    .then(res => {
+      this.addSuccess('更新成功')
+    })
+    .catch(err => {
+      console.log(err)
+    })
   },
 
   proInputHandle (e) {
@@ -209,9 +245,9 @@ Page({
   /**
    * 添加成功
    */
-  addSuccess () {
+  addSuccess (title = '添加成功') {
     wx.showToast({
-      title: '添加成功',
+      title,
       icon: 'success'
     })
     setTimeout(() => {
@@ -223,5 +259,25 @@ Page({
         }
       })
     }, 1000)
+  },
+
+  /**
+   * 编辑情况下查询初始化数据
+   */
+  getEditDetail () {
+    this.data.DB.collection('todos')
+    .where({
+      _id: this.data.initId
+    }).get().then(res => {
+      let {data = []} = res
+      let r = data[0] || {}
+      this.setData({
+        submitData: r,
+        pickerVal: r.level,
+        compValue: dateFormat({ date: r.completeDate, contDay: false })
+      })
+    }).catch(err => {
+      console.log(err)
+    })
   }
 })
