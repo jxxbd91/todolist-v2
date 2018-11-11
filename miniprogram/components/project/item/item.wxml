@@ -17,7 +17,7 @@
       <view class='head-right-icons'>
         <image wx:if="{{hiddenFlag}}" bindtap="rowDownHandle" class='icon row-down' src='../../../images/icons/down-black.png'></image>
         <image wx:else bindtap="rowDownHandle" class='icon row-down' src='../../../images/icons/up-black.png'></image>
-        <image class='icon add-btn' src='../../../images/icons/plus-black.png'></image>
+        <image class='icon add-btn' src='../../../images/icons/plus-black.png' data-name="{{projectData.head.projectName}}" data-projid="{{projectData.head.projectId}}" bindtap='addWithProjHandle'></image>
       </view>
     </view>
   </view>
@@ -26,8 +26,8 @@
       <view class='pl-main'>
         <view class='pl-left-color-block {{projectList.getColorBlock(projectList.levels[item.level])}}'></view>
         <view class='pl-content'>
-          <view class='pl-text'>{{item.title}}</view>
-          <view class='pl-btn'>开始</view>
+          <view class='pl-text {{item.done?"done":""}}' data-id="{{item._id}}" bindtap='tapHandle'>{{item.title}}</view>
+          <view class='pl-btn {{item.done?"done-mask":""}}' data-id="{{item._id}}" data-doneflag="{{item.done}}" bindtap='finishHandle'>{{item.done?'开始':'完成'}}</view>
         </view>
       </view>
     </block>

@@ -1,0 +1,4 @@
+<!--components/levelIcon/levelIcon.wxml-->
+<view class='com-level-icon' style='background-color: {{bgColors[level]}}'>
+  <view class='cli-right' style='border-color: {{bgColors[level]}}; border-right-color: transparent'></view>
+</view>

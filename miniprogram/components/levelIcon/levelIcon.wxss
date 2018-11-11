@@ -1,0 +1,20 @@
+/* components/levelIcon/levelIcon.wxss */
+.com-level-icon {
+  height: 40rpx;
+  width: 30rpx;
+  background-color: #000;
+  position: relative;
+}
+
+.cli-right {
+  content: "";
+  display: block;
+  width: 0;
+  height: 0;
+  border-width: 20rpx 20rpx;
+  border-color: #000;
+  border-style: solid;
+  border-right-color: transparent;
+  position: absolute;
+  right: -35rpx;
+}

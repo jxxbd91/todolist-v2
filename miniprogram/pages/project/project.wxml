@@ -1,5 +1,5 @@
 <!--miniprogram/pages/list/list.wxml-->
 <view class='project'>
   <!-- list -->
-  <com-project-item wx:for="{{list}}" wx:key="index" projectData="{{item}}"></com-project-item>
+  <com-project-item wx:for="{{list}}" wx:key="index" projectData="{{item}}" bind:statuschange="statusChange"></com-project-item>
 </view>

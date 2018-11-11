@@ -3,11 +3,13 @@
 <view class='com-dl-card {{"color-block-"+type}}'>
   <view class='cdc-title'>{{title}}</view>
   <view class='cdc-list'>
-    <checkbox-group>
+    <!-- <checkbox-group> -->
       <view class='cdc-item' wx:for="{{list}}" wx:key="{{item._id}}">
-        <checkbox></checkbox>
-        <text class='cdc-item-cont'>{{item.destription}}</text>
+        <!-- <checkbox></checkbox> -->
+        <navigator url='/pages/detail/detail?id={{item._id}}'>
+          <text class='cdc-item-cont {{item.done?"done":""}}'>{{item.destription}}</text>
+        </navigator>
       </view>
-    </checkbox-group>
+    <!-- </checkbox-group> -->
   </view>
 </view>

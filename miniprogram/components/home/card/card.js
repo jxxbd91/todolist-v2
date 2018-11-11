@@ -15,7 +15,7 @@ Component({
    * 组件的初始数据
    */
   data: {
-    titles: [dateFormat({}), dateFormat({ date: Date.now() + 24 * 60 * 60 * 1000 }), '本周', '记录']
+    titles: [dateFormat({}), '已完成', '本周', '记录']
   },
 
   /**

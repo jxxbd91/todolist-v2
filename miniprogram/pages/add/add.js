@@ -18,8 +18,10 @@ Page({
       project: '',
       projectId: '',
       title: '',
-      destription: ''
+      destription: '',
+      done: false
     },
+    initProjectId: '',
     DB: null
   },
 
@@ -27,6 +29,11 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.setData({
+      initProjectId: options.projectId || '',
+      'submitData.projectId': options.projectId || '',
+      'submitData.project': options.projectName || ''
+    })
     this.data.DB = wx.cloud.database()
   },
 
@@ -34,7 +41,6 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    console.log(this.data)
     this.getProjectList()
   },
 
@@ -88,12 +94,20 @@ Page({
       .get({
         success (res) {
           let { data } = res
+          console.log(data)
           let pro = data.map(item => item.name)
+          let ids = data.map(item => item._id)
+          let picker = ids.indexOf(_this.data.initProjectId)
           pro.push('其他')
           _this.setData({
             originProjects: data,
             projects: pro
           })
+          if (picker > -1) {
+            _this.setData({
+              pickerVal: picker
+            })
+          }
         }
       })
   },
@@ -156,6 +170,7 @@ Page({
     } else {
       let params = JSON.parse(JSON.stringify(this.data.submitData))
       params.createTime = new Date().getTime()
+      params.completeDate = new Date(this.data.compValue).getTime()
       this.data.DB.collection('todos')
         .add({
           data: params,

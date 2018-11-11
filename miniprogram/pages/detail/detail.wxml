@@ -1,0 +1,18 @@
+<!--miniprogram/pages/detail/detail.wxml-->
+<com-header title="详情"></com-header>
+<view class='continer'>
+  <view class='detail-cont'>
+    <view class='detail-title'>
+      <com-level-icon class='com-dt' level="{{todoInfo.level}}"></com-level-icon>
+      <view>{{todoInfo.title}}</view>
+    </view>
+    <view class='detail-description {{doneFlag?"done":""}}'>{{todoInfo.destription}}</view>
+    
+  </view>
+
+  <view class='detail-btns'>
+    <view wx:if="{{!doneFlag}}" class='btn btn-completed' data-finish="{{true}}" bindtap='completedHandle'>完成</view>
+    <view wx:else class='btn btn-start' data-finish="{{false}}" bindtap='completedHandle'>开始</view>
+    <view class='btn btn-edit' bindtap='editHandle'>编辑</view>
+</view>
+</view>

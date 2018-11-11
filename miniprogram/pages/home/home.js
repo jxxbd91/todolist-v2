@@ -14,7 +14,7 @@ Page({
       },
       {
         no: 0,
-        date: '将来',
+        date: '已完成',
         query: 1
       },
       {

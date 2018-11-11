@@ -72,7 +72,9 @@ Page({
       this.setData({
         list: result.map(item => {
           item.head = {
-            title: item.projectName
+            title: item.projectName,
+            projectId: item.projectId,
+            projectName: item.projectName
           }
           return item
         })
@@ -81,5 +83,9 @@ Page({
     }).catch(err => {
       console.log(err)
     })
+  },
+
+  statusChange () {
+    this.getInitList()
   }
 })

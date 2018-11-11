@@ -10,12 +10,7 @@ Page({
     },
     type: '',
     deLists: [
-      [
-        {
-          id: 1,
-          content: '123'
-        }
-      ]
+      []
     ]
   },
 
@@ -23,7 +18,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     this.setData({
       'header.title': options.title,
       type: options.type
@@ -34,14 +28,14 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
-    this.getDetailList()
+    // this.getDetailList()
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.getDetailList()
   },
 
   /**
@@ -83,7 +77,7 @@ Page({
    * 获取详情列表
    * 需要根据type进行判断，type共有四种可能值
    * 0 -- 今天
-   * 1 -- 将来
+   * 1 -- 已完成
    * 2 -- 本周
    * 3 -- 记录
    */
@@ -91,9 +85,7 @@ Page({
     const db = wx.cloud.database()
     let condition = this.queryCondition(db.command)
     if (condition) {
-      db.collection('todos').where({
-        completeDate: condition
-      }).get().then(res => {
+      db.collection('todos').where(condition).get().then(res => {
         this.queryServerResult(res)
       }).catch(err => {
         console.log(err)
@@ -121,11 +113,19 @@ Page({
     const dayE = dayS + 7 * aDay
     switch(this.data.type) {
       case '0':
-        return _.gt(todayS).and(_.lt(tomoS))
+        return {
+          completeDate: _.gte(todayS).and(_.lt(tomoS)),
+          done: false
+        }
       case '1':
-        return _.gt(tomoS)
+        return {
+          done: true
+        }
       case '2':
-        return _.gt(dayS).and(_.lt(dayE))
+        return {
+          completeDate: _.gte(dayS).and(_.lt(dayE)),
+          done: false
+        }
       case '3':
         return null
     }

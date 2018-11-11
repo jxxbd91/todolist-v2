@@ -8,7 +8,7 @@ const _ = db.command
 exports.main = async (event, context) => {
   const aDay = 24 * 60 * 60 * 1000
   const now = new Date()
-  const todayS = new Date(now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()).getTime()
+  const todayS = new Date(now.getFullYear() + '-' + (now.getMonth() + 1) + '-' + now.getDate()).getTime() - 1
   const tomoS = todayS + aDay
   const tomoE = tomoS + aDay
   const nDay = now.getDay()
@@ -16,13 +16,15 @@ exports.main = async (event, context) => {
   const dayE = dayS + 7 * aDay
   return Promise.all([
     await db.collection('todos').where({
-      completeDate: _.gt(todayS).and(_.lt(tomoS))
+      completeDate: _.gte(todayS).and(_.lt(tomoS)),
+      done: false
     }).count(),
     await db.collection('todos').where({
-      completeDate: _.gt(tomoS)
+      done: true
     }).count(),
     await db.collection('todos').where({
-      completeDate: _.gt(dayS).and(_.lt(dayE))
+      completeDate: _.gte(dayS).and(_.lt(dayE)),
+      done: false
     }).count(),
     await db.collection('todos').count()
   ])
