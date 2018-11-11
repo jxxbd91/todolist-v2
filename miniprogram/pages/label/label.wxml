@@ -1,2 +1,6 @@
 <!--pages/label/label.wxml-->
-<text>pages/label/label.wxml</text>
+<com-header title="todos"></com-header>
+
+<view class='label-container'>
+  功能待完善。。。
+</view>
