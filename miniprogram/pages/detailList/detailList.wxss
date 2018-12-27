@@ -5,10 +5,6 @@ page {
   height: 100vh;
 }
 
-.com-header {
-  
-}
-
 .dl-list {
   display: flex;
   flex-wrap: wrap;

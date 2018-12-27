@@ -21,3 +21,8 @@
   border-bottom: 1rpx solid #fff;
   line-height: 70rpx;
 }
+
+.cdc-item-cont.done {
+  color: #aaa;
+  text-decoration: line-through;
+}

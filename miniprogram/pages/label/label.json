@@ -1,1 +1,5 @@
-{}
+{
+  "usingComponents": {
+    "com-header": "../../components/header/header"
+  }
+}

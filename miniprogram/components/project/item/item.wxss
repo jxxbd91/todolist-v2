@@ -1,5 +1,6 @@
 /* components/project/item/item.wxss */
 @import "../../../styles/tasklevel.wxss";
+@import "../../../styles/common.wxss";
 
 page {
   background-color:rgb(228, 229, 230);
@@ -91,4 +92,9 @@ page {
   justify-content: center;
 }
 
+.pl-text {
+  flex-grow: 1;
+  height: 100%;
+  line-height: 100rpx;
+}
 

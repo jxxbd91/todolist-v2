@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "com-header": "../../components/header/header",
+    "com-level-icon": "../../components/levelIcon/levelIcon"
+  }
+}

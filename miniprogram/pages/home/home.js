@@ -1,3 +1,4 @@
+
 // miniprogram/pages/home/home.js
 Page({
 
@@ -14,7 +15,7 @@ Page({
       },
       {
         no: 0,
-        date: '将来',
+        date: '已完成',
         query: 1
       },
       {
@@ -56,7 +57,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow () {
   },
 
   /**
@@ -95,7 +96,7 @@ Page({
     wx.cloud.callFunction({
       name: 'getIndexList'
     }).then(res => {
-      let { result = [] } = res
+      let {result = []} = res
       console.log(result)
       this.setData({
         'cardList[0].no': result[0] ? result[0].total : 0,
@@ -107,4 +108,5 @@ Page({
       console.log(err)
     })
   }
+
 })
